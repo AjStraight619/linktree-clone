@@ -10,7 +10,7 @@ const UserAvatar = ({ dbUser }: UserAvatarProps) => {
   return (
     <Link href="/dashboard">
       <Avatar className="absolute top-2 right-14">
-        <AvatarImage src={dbUser?.avatar} alt={dbUser?.name} />
+        <AvatarImage src={dbUser?.avatar || ""} alt={dbUser?.name} />
         <AvatarFallback>{dbUser?.name?.charAt(0).toUpperCase()}</AvatarFallback>
       </Avatar>
     </Link>
