@@ -1,13 +1,15 @@
+"use client";
+
 import { Button } from "@/components/ui/button";
-import Link from "next/link";
+import { LoginLink, RegisterLink } from "@kinde-oss/kinde-auth-nextjs";
 
 export const AuthButtons = () => (
   <div>
     <Button className="mr-4">
-      <Link href="/api/auth/login">Sign In</Link>
+      <LoginLink>Sign In</LoginLink>
     </Button>
     <Button>
-      <Link href="api/auth/signin">Sign Up</Link>
+      <RegisterLink>Sign Up</RegisterLink>
     </Button>
   </div>
 );

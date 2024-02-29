@@ -4,6 +4,8 @@ type LinkTreePageProps = {
   };
 };
 
+// dynamic route to display a user's link tree
+
 export default function LinkTreePage({ params }: LinkTreePageProps) {
   return (
     <main>
