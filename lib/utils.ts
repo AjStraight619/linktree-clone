@@ -1,4 +1,6 @@
 import { clsx, type ClassValue } from "clsx";
+import { UserIcon } from "lucide-react";
+import React from "react";
 import { twMerge } from "tailwind-merge";
 import { icons } from "./data";
 
@@ -28,4 +30,31 @@ export const getTitleFromUrl = (url: string) => {
   } else {
     return "Unknown"; // Fallback title
   }
+};
+
+export const matchIcon = (url: string): React.ReactElement => {
+  const domain = getTitleFromUrl(url).toLowerCase();
+  return (
+    icons[domain as keyof typeof icons]?.icon || React.createElement(UserIcon)
+  );
+};
+
+export const checkIsLinkValid = (link: string) => {
+  return link.startsWith("http://") || link.startsWith("https://");
+};
+
+export const getErrorMessage = (error: unknown): string => {
+  let message: string;
+
+  if (error instanceof Error) {
+    message = error.message;
+  } else if (error && typeof error === "object" && "message" in error) {
+    message = String(error.message);
+  } else if (typeof error === "string") {
+    message = error;
+  } else {
+    message = "Something went wrong";
+  }
+
+  return message;
 };

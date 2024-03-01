@@ -1,8 +1,13 @@
 "use server";
-
+import { getErrorMessage } from "@/lib/utils";
 import { prisma } from "@/prisma/prisma";
 import { KindeUser } from "@kinde-oss/kinde-auth-nextjs/dist/types";
 import { revalidatePath } from "next/cache";
+
+type UpdateUsernameResponse = {
+  success: boolean;
+  error: string | null;
+};
 
 export const checkIfUserExistsInDb = async (userId: string) => {
   const user = await prisma.user.findUnique({
@@ -10,6 +15,7 @@ export const checkIfUserExistsInDb = async (userId: string) => {
       id: userId,
     },
   });
+  console.log("user", user);
   return user;
 };
 
@@ -60,10 +66,11 @@ export const addOrUpdateLinks = async (formData: FormData) => {
   );
 
   revalidatePath(`/dashboard`);
+  return processedLinks;
 };
 
 export const getDbUserWithLinks = async (userId: string) => {
-  return await prisma.user.findUnique({
+  const links = await prisma.user.findUnique({
     where: {
       id: userId,
     },
@@ -71,28 +78,62 @@ export const getDbUserWithLinks = async (userId: string) => {
       links: true,
     },
   });
+  revalidatePath(`/dashboard`);
+  return links;
 };
 
-export const updateUsername = async (formData: FormData) => {
+export const updateUsername = async (
+  formData: FormData
+): Promise<UpdateUsernameResponse> => {
   const userId = formData.get("userId") as string;
   const username = formData.get("username") as string;
-  const user = await prisma.user.update({
-    where: {
-      id: userId,
-    },
-    data: {
-      username: username,
-    },
-  });
-  revalidatePath(`/dashboard`);
+  try {
+    const user = await prisma.user.update({
+      where: {
+        id: userId,
+      },
+      data: {
+        username: username,
+      },
+    });
+
+    return {
+      success: true,
+      error: null,
+    };
+  } catch (err) {
+    const error = getErrorMessage(err);
+    return {
+      success: false,
+      error,
+    };
+  } finally {
+    revalidatePath(`/dashboard`);
+  }
 };
 
 export const removeLink = async (formData: FormData) => {
   const linkId = formData.get("linkId") as string;
-  await prisma.link.delete({
-    where: {
-      id: linkId,
-    },
-  });
-  revalidatePath(`/dashboard`);
+
+  try {
+    const removedLink = await prisma.link.delete({
+      where: {
+        id: linkId,
+      },
+    });
+    if (removedLink) {
+      return {
+        success: true,
+        error: null,
+      };
+    }
+  } catch (err) {
+    const error = getErrorMessage(err);
+    return {
+      success: false,
+      error,
+    };
+  } finally {
+    revalidatePath(`/dashboard`);
+  }
 };

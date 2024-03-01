@@ -1,6 +1,6 @@
 import { UserLink, UserLinkAction } from "@/lib/types";
 import { motion } from "framer-motion";
-import RemoveLink from "../dashboard-page/remove-link";
+import RemoveLink from "./remove-link";
 
 type TreeLinkProps = {
   link: UserLink;
@@ -10,7 +10,7 @@ type TreeLinkProps = {
 const TreeLink = ({ link, dispatch }: TreeLinkProps) => {
   return (
     <motion.li
-      className="flex items-center justify-between w-full"
+      className="flex items-center justify-between w-full rounded-xl shadow-lg p-2 dark:bg-gray-900 border"
       animate="animate"
       initial="hidden"
     >
@@ -18,7 +18,7 @@ const TreeLink = ({ link, dispatch }: TreeLinkProps) => {
         href={link.url}
         target="_blank"
         rel="noreferrer"
-        className="flex items-center gap-2"
+        className="flex items-center gap-2 w-full"
       >
         <span>{link.icon}</span>
         <span>{link.title}</span>

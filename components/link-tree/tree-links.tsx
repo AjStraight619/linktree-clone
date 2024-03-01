@@ -1,12 +1,10 @@
 "use client";
-
 import { ulVariants } from "@/lib/constants";
-import { icons } from "@/lib/data";
 import { DbUserWithLinks, UserLink, UserLinkAction } from "@/lib/types";
-import { getTitleFromUrl } from "@/lib/utils";
+import { matchIcon } from "@/lib/utils";
 import { motion } from "framer-motion";
-import { UserIcon } from "lucide-react";
 import { useOptimistic } from "react";
+import AddNewLinks from "./add-new-links";
 import TreeLink from "./tree-link";
 
 type LinksProps = {
@@ -47,11 +45,6 @@ function reducer(state: UserLink[], action: UserLinkAction): UserLink[] {
 }
 
 const TreeLinks = ({ dbUser }: LinksProps) => {
-  const matchIcon = (url: string): React.ReactElement => {
-    const domain = getTitleFromUrl(url).toLowerCase();
-    return icons[domain as keyof typeof icons]?.icon || <UserIcon />;
-  };
-
   const initialUserLinks = dbUser?.links?.map((link) => ({
     id: link.id,
     title: link.title,
@@ -59,20 +52,24 @@ const TreeLinks = ({ dbUser }: LinksProps) => {
     icon: matchIcon(link.url),
   }));
 
-  console.log("initialUserLinks", initialUserLinks);
-
   const [optimisticUserLinks, dispatch] = useOptimistic(
     initialUserLinks ?? [],
     reducer
   );
 
   return (
-    <div className="flex flex-col items-center justify-between">
-      <motion.ul animate="animate" initial="hidden" variants={ulVariants}>
+    <div className="flex flex-col items-center justify-center w-full">
+      <motion.ul
+        className="flex flex-col w-full"
+        animate="animate"
+        initial="hidden"
+        variants={ulVariants}
+      >
         {optimisticUserLinks.map((link) => (
           <TreeLink key={link.id} link={link} dispatch={dispatch} />
         ))}
       </motion.ul>
+      <AddNewLinks dispatch={dispatch} dbUser={dbUser} />
     </div>
   );
 };
