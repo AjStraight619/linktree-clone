@@ -1,3 +1,5 @@
+import { Card, CardHeader } from "@/components/ui/card";
+
 type LinkTreePageProps = {
   params: {
     username: string;
@@ -10,7 +12,9 @@ export default function LinkTreePage({ params }: LinkTreePageProps) {
   const { username } = params;
   return (
     <main className="min-h-screen flex flex-col items-center justify-center p-24">
-      <h1>Individual link tree in dynamic route {username}</h1>
+      <Card className="w-[24rem] dark:bg-gray-900">
+        <CardHeader></CardHeader>
+      </Card>
     </main>
   );
 }

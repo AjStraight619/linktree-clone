@@ -14,11 +14,12 @@ datasource db {
 }
 
 model User {
-  id     String  @id @unique
-  email  String  @unique
-  name   String
-  avatar String?
-  Link   Link[]
+  id       String  @id @unique
+  email    String  @unique
+  name     String
+  avatar   String?
+  username String? @unique
+  links    Link[]
 }
 
 model Link {
@@ -29,4 +30,6 @@ model Link {
   user      User     @relation(fields: [userId], references: [id])
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
+
+  @@unique([userId, url])
 }

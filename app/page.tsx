@@ -16,8 +16,6 @@ type HomeProps = {
   };
 };
 
-const getDataBaseUser = async (userId: string) => {};
-
 export default async function Home({ searchParams }: HomeProps) {
   let dbUser;
   const { getUser, isAuthenticated } = getKindeServerSession();
@@ -27,10 +25,6 @@ export default async function Home({ searchParams }: HomeProps) {
   if (!dbUser && user) {
     await createUserInDb(user);
   }
-
-  console.log(searchParams?.search);
-
-  console.log("db user", dbUser);
 
   return (
     <main className="flex min-h-screen flex-col items-center justify-center p-24">
