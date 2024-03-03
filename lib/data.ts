@@ -1,17 +1,17 @@
-import {
-  FacebookIcon,
-  GithubIcon,
-  InstagramIcon,
-  LinkedinIcon,
-  TwitterIcon,
-} from "lucide-react";
 import React from "react";
+import {
+  FaFacebookF,
+  FaGithub,
+  FaInstagram,
+  FaLinkedinIn,
+  FaTwitter,
+} from "react-icons/fa";
 import { Icon } from "./types";
 
 export const icons: { [key: string]: Icon } = {
-  linkedin: { icon: React.createElement(LinkedinIcon), name: "LinkedIn" },
-  twitter: { icon: React.createElement(TwitterIcon), name: "X" },
-  github: { icon: React.createElement(GithubIcon), name: "GitHub" },
-  facebook: { icon: React.createElement(FacebookIcon), name: "Facebook" },
-  instagram: { icon: React.createElement(InstagramIcon), name: "Instagram" },
+  linkedin: { icon: React.createElement(FaLinkedinIn), name: "LinkedIn" },
+  twitter: { icon: React.createElement(FaTwitter), name: "Twitter" },
+  github: { icon: React.createElement(FaGithub), name: "GitHub" },
+  facebook: { icon: React.createElement(FaFacebookF), name: "Facebook" },
+  instagram: { icon: React.createElement(FaInstagram), name: "Instagram" },
 };
