@@ -1,36 +1,23 @@
-import { editProfile } from "@/actions/profile-actions";
 import { getDbUserWithLinks } from "@/actions/user-actions";
-import Bio from "@/components/profile-page/bio";
-import FileUpload from "@/components/profile-page/file-upload";
-import {
-  Card,
-  CardContent,
-  CardFooter,
-  CardHeader,
-  CardTitle,
-} from "@/components/ui/card";
-import { Input } from "@/components/ui/input";
-import { Label } from "@/components/ui/label";
-import SubmitButton from "@/components/ui/submit-btn";
+import ProfileCard from "@/components/profile-page/profile-card";
 import { getKindeServerSession } from "@kinde-oss/kinde-auth-nextjs/server";
-import { ChevronLeftIcon } from "lucide-react";
-import Link from "next/link";
 
 export default async function ProfilePage() {
   const { getUser } = getKindeServerSession();
   const user = await getUser();
   const dbUser = user ? await getDbUserWithLinks(user.id) : null;
 
-  const handleAction = async (formData: FormData) => {
-    "use server";
-    formData.append("userId", dbUser?.id as string);
-    const actionResponse = await editProfile(formData);
-    console.log("actionResponse", actionResponse);
-  };
+  // const handleAction = async (formData: FormData) => {
+
+  //   formData.append("userId", dbUser?.id as string);
+  //   const actionResponse = await editProfile(formData);
+  //   console.log("actionResponse", actionResponse);
+  // };
 
   return (
     <main className="min-h-screen flex flex-col items-center justify-center gap-4 p-24">
-      <Card className="min-w-[24rem] dark:bg-gray-950 shadow-lg relative">
+      <ProfileCard dbUser={dbUser} />
+      {/* <Card className="min-w-[24rem] dark:bg-gray-950 shadow-lg relative">
         <CardHeader>
           <CardTitle className="text-center">Edit Profile</CardTitle>
         </CardHeader>
@@ -74,7 +61,7 @@ export default async function ProfilePage() {
             </SubmitButton>
           </CardFooter>
         </form>
-      </Card>
+      </Card> */}
     </main>
   );
 }
