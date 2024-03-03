@@ -63,7 +63,7 @@ const TreeLinks = ({ dbUser }: LinksProps) => {
   return (
     <div className="flex flex-col items-center justify-center w-full">
       <motion.ul
-        className="flex flex-col w-full"
+        className="flex flex-col w-full space-y-2"
         animate="animate"
         initial="hidden"
         variants={ulVariants}

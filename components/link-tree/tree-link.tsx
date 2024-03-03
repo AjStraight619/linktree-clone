@@ -1,5 +1,6 @@
 import { UserLink, UserLinkAction } from "@/lib/types";
 import { motion } from "framer-motion";
+import { usePathname } from "next/navigation";
 import RemoveLink from "./remove-link";
 
 type TreeLinkProps = {
@@ -8,6 +9,7 @@ type TreeLinkProps = {
 };
 
 const TreeLink = ({ link, dispatch }: TreeLinkProps) => {
+  const pathname = usePathname();
   return (
     <motion.li
       className="flex items-center justify-between w-full rounded-xl shadow-lg p-2 dark:bg-gray-900 border"
@@ -23,7 +25,9 @@ const TreeLink = ({ link, dispatch }: TreeLinkProps) => {
         <span>{link.icon}</span>
         <span>{link.title}</span>
       </a>
-      <RemoveLink link={link} dispatch={dispatch} />
+      {pathname === "/dashboard" && (
+        <RemoveLink link={link} dispatch={dispatch} />
+      )}
     </motion.li>
   );
 };
