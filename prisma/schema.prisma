@@ -19,6 +19,7 @@ model User {
   name     String
   avatar   String?
   username String? @unique
+  bio      String?
   links    Link[]
 }
 

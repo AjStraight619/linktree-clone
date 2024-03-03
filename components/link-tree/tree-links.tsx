@@ -3,6 +3,7 @@ import { ulVariants } from "@/lib/constants";
 import { DbUserWithLinks, UserLink, UserLinkAction } from "@/lib/types";
 import { matchIcon } from "@/lib/utils";
 import { motion } from "framer-motion";
+import { usePathname } from "next/navigation";
 import { useOptimistic } from "react";
 import AddNewLinks from "./add-new-links";
 import TreeLink from "./tree-link";
@@ -57,6 +58,8 @@ const TreeLinks = ({ dbUser }: LinksProps) => {
     reducer
   );
 
+  const pathname = usePathname();
+
   return (
     <div className="flex flex-col items-center justify-center w-full">
       <motion.ul
@@ -69,7 +72,9 @@ const TreeLinks = ({ dbUser }: LinksProps) => {
           <TreeLink key={link.id} link={link} dispatch={dispatch} />
         ))}
       </motion.ul>
-      <AddNewLinks dispatch={dispatch} dbUser={dbUser} />
+      {pathname === "/dashboard" && (
+        <AddNewLinks dispatch={dispatch} dbUser={dbUser} />
+      )}
     </div>
   );
 };

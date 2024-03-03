@@ -1,10 +1,8 @@
 import { updateUsername } from "@/actions/user-actions";
 import { User } from "@prisma/client";
-import { Pencil } from "lucide-react";
 import Link from "next/link";
 import { useEffect, useRef, useState } from "react";
 import toast from "react-hot-toast";
-import { Button } from "../ui/button";
 import { Input } from "../ui/input";
 import SubmitButton from "../ui/submit-btn";
 
@@ -58,7 +56,7 @@ const Username = ({ dbUser }: UsernameProps) => {
   }, [isEditing]);
 
   return (
-    <div className={`${!isEditing && "items-center"} inline-flex gap-1`}>
+    <div className={`${!isEditing && "items-center"} inline-flex`}>
       {isEditing ? (
         <div className="space-y-2">
           <Input
@@ -88,16 +86,6 @@ const Username = ({ dbUser }: UsernameProps) => {
           {"@" + dbUser?.username}
         </Link>
       )}
-
-      <Button
-        className="hover:text-primary text-primary/70 ml-1"
-        size="icon"
-        variant="ghost"
-        type="button"
-        onClick={() => setIsEditing(!isEditing)}
-      >
-        <Pencil size={20} />
-      </Button>
     </div>
   );
 };

@@ -1,3 +1,4 @@
+"use client";
 import { cn } from "@/lib/utils";
 import { Loader2 } from "lucide-react";
 import React from "react";
@@ -9,18 +10,18 @@ type SubmitButtonProps = {
   children: React.ReactNode;
   type?: ButtonProps["type"];
   size?: ButtonProps["size"];
-  classes?: string;
+  className?: string;
 };
 const SubmitButton = ({
   variant,
   children,
   type,
   size,
-  classes,
+  className,
 }: SubmitButtonProps) => {
   const { pending } = useFormStatus();
   return (
-    <Button type="submit" className={cn(classes)}>
+    <Button type="submit" className={cn(className)}>
       {pending ? <Loader2 className="animate-spin" /> : children}
     </Button>
   );

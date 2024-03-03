@@ -1,4 +1,5 @@
-import { Card, CardHeader } from "@/components/ui/card";
+import ProfileCard from "@/components/link-tree/profile-card";
+import { prisma } from "@/prisma/prisma";
 
 type LinkTreePageProps = {
   params: {
@@ -8,13 +9,25 @@ type LinkTreePageProps = {
 
 // dynamic route to display a user's link tree
 
-export default function LinkTreePage({ params }: LinkTreePageProps) {
+const getUserByUsername = async (username: string) => {
+  const dbUser = await prisma.user.findUnique({
+    where: {
+      username,
+    },
+    include: {
+      links: true,
+    },
+  });
+
+  return dbUser;
+};
+
+export default async function LinkTreePage({ params }: LinkTreePageProps) {
   const { username } = params;
+  const dbUser = await getUserByUsername(username);
   return (
     <main className="min-h-screen flex flex-col items-center justify-center p-24">
-      <Card className="w-[24rem] dark:bg-gray-900">
-        <CardHeader></CardHeader>
-      </Card>
+      <ProfileCard dbUser={dbUser} />
     </main>
   );
 }
