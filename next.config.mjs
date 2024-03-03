@@ -5,8 +5,6 @@ const nextConfig = {
           {
             protocol: 'https',
             hostname: 'link-tree-clone-local.s3.us-west-1.amazonaws.com',
-        
-          
           },
         ],
       },

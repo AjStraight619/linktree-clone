@@ -1,4 +1,4 @@
-import { checkIfUserExistsInDb } from "@/actions/user-actions";
+import { checkIfUserExistsInDb, createUserInDb } from "@/actions/user-actions";
 import { AuthButtons } from "@/components/landing-page/auth-buttons";
 import { Header } from "@/components/landing-page/header";
 import Search from "@/components/landing-page/search";
@@ -23,9 +23,9 @@ export default async function Home({ searchParams }: HomeProps) {
   const user = await getUser();
   dbUser = user ? await checkIfUserExistsInDb(user.id) : null;
   console.log("dbUser", dbUser);
-  // if (!dbUser && user) {
-  //   await createUserInDb(user);
-  // }
+  if (!dbUser && user) {
+    await createUserInDb(user);
+  }
 
   return (
     <main className="flex min-h-screen flex-col items-center justify-center p-24">
