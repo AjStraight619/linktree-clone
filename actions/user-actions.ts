@@ -78,7 +78,7 @@ export const getDbUserWithLinks = async (userId: string) => {
       links: true,
     },
   });
-  revalidatePath(`/dashboard`);
+  revalidatePath(`/dashboard/profile`);
   return links;
 };
 
