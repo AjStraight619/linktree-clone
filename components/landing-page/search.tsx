@@ -20,7 +20,7 @@ const Search = () => {
   }, 300);
 
   return (
-    <div className="relative md:w-1/2 w-full px-2 mt-4 group">
+    <div className="relative md:w-1/2 w-full px-2 mt-8 group">
       <Input
         className="text-muted-foreground pl-8 w-full"
         type="text"

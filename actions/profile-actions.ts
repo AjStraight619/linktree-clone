@@ -11,32 +11,6 @@ export const editProfile = async (formData: FormData) => {
   const username = formData.get("username") as string;
   const bio = formData.get("bio") as string;
 
-  //   let signedUrlResult;
-  //   try {
-  //     signedUrlResult = await getSignedURL();
-  //     if (!signedUrlResult) {
-  //       throw new Error("Failed to get signed URL");
-  //     }
-  //   } catch (err) {
-  //     const error = getErrorMessage(err);
-  //     return {
-  //       error: `Error getting signed URL: ${error}`,
-  //     };
-  //   }
-
-  //   const url = signedUrlResult.success.url;
-
-  //   console.log({ url });
-
-  //   try {
-  //     await updateProfileImage(file, url);
-  //   } catch (err) {
-  //     const error = getErrorMessage(err);
-  //     return {
-  //       error: `Error updating profile image: ${error}`,
-  //     };
-  //   }
-
   try {
     await prisma.user.update({
       where: {
@@ -62,27 +36,17 @@ export const editProfile = async (formData: FormData) => {
   return { success: true };
 };
 
-// const updateProfileImage = async (file: File, url: string) => {
-//   if (!file) {
-//     return;
-//   }
-//   try {
-//     const bytes = await file.arrayBuffer();
-//     const buffer = Buffer.from(bytes);
+export const getDbUsersByUsername = async (username: string) => {
+  const dbUsers = await prisma.user.findMany({
+    where: {
+      username: {
+        contains: username,
+      },
+    },
+    include: {
+      links: true,
+    },
+  });
 
-//     const response = await fetch(url, {
-//       method: "PUT",
-//       body: buffer,
-//       headers: {
-//         "Content-Type": file?.type,
-//       },
-//     });
-
-//     if (!response.ok) {
-//       throw new Error(`HTTP error! status: ${response.status}`);
-//     }
-//   } catch (err) {
-//     const error = getErrorMessage(err);
-//     throw new Error(`Error uploading profile image: ${error}`);
-//   }
-// };
+  return dbUsers;
+};

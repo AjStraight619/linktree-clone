@@ -9,7 +9,7 @@ import TreeLinks from "./tree-links";
 import Username from "./username";
 
 type ProfileCardProps = {
-  dbUser: DbUserWithLinks;
+  dbUser: DbUserWithLinks | null;
 };
 
 const ProfileCard = ({ dbUser }: ProfileCardProps) => {

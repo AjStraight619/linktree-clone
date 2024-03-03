@@ -11,7 +11,7 @@ const UserAvatar = ({ dbUser }: UserAvatarProps) => {
     <>
       {dbUser && (
         <Link href="/dashboard">
-          <Avatar className="absolute top-2 right-14">
+          <Avatar className="absolute top-2 right-14 h-12 w-12">
             <AvatarImage src={dbUser?.avatar || ""} alt={dbUser?.name} />
             <AvatarFallback>
               {dbUser?.name?.charAt(0).toUpperCase()}

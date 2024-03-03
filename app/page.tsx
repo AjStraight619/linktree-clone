@@ -1,6 +1,7 @@
 import { checkIfUserExistsInDb, createUserInDb } from "@/actions/user-actions";
 import { AuthButtons } from "@/components/landing-page/auth-buttons";
 import { Header } from "@/components/landing-page/header";
+import LinkTreeSearchList from "@/components/landing-page/link-tree-search";
 import Search from "@/components/landing-page/search";
 import UserAvatar from "@/components/landing-page/user-avatar";
 import { Button } from "@/components/ui/button";
@@ -28,8 +29,8 @@ export default async function Home({ searchParams }: HomeProps) {
   }
 
   return (
-    <main className="flex min-h-screen flex-col items-center justify-center p-24">
-      <div className="absolute top-0 flex flex-col items-center justify-start pt-24">
+    <main className="flex min-h-screen flex-col items-center justify-between p-24 overflow-y-auto">
+      <div className="flex flex-col items-center justify-start pt-24 w-full space-y-8">
         <Header />
         {(await isAuthenticated()) ? (
           <div className="flex flex-col items-center justify-center gap-2">
@@ -43,11 +44,15 @@ export default async function Home({ searchParams }: HomeProps) {
         ) : (
           <AuthButtons />
         )}
+
+        <Suspense fallback={<div>Loading...</div>}>
+          <Search />
+        </Suspense>
       </div>
-      <Suspense fallback={<div>Loading...</div>}>
-        <Search />
-      </Suspense>
       <UserAvatar dbUser={dbUser} />
+      <Suspense fallback={<div>Loading...</div>}>
+        <LinkTreeSearchList searchParams={searchParams} />
+      </Suspense>
     </main>
   );
 }
