@@ -14,7 +14,7 @@ const Bio = ({ dbUser }: BioProps) => {
         name="bio"
         defaultValue={dbUser?.bio ?? ""}
         className="resize-none"
-        maxLength={50}
+        maxLength={120}
       />
     </>
   );

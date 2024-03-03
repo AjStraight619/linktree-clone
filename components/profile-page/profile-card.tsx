@@ -32,7 +32,7 @@ const ProfileCard = ({ dbUser }: ProfileCardProps) => {
     }
   };
   return (
-    <Card className="min-w-[24rem] dark:bg-gray-950 shadow-lg relative">
+    <Card className="w-[24rem] dark:bg-gray-950 shadow-lg relative">
       <CardHeader>
         <CardTitle className="text-center">Edit Profile</CardTitle>
       </CardHeader>

@@ -18,7 +18,7 @@ const ProfileCard = ({ dbUser }: ProfileCardProps) => {
 
   return (
     <>
-      <Card className="min-w-[24rem] dark:bg-gray-950 shadow-lg relative">
+      <Card className="w-[24rem] dark:bg-gray-950 shadow-lg relative">
         <CardHeader>
           <div className="flex flex-row items-center justify-center">
             <div className="relative p-2">
@@ -35,7 +35,7 @@ const ProfileCard = ({ dbUser }: ProfileCardProps) => {
             <span className="text-2xl font-semibold ml-1">{dbUser?.name}</span>
           </div>
         </CardHeader>
-        <CardDescription className="text-center tracking-tight leading-3 w-full pb-3">
+        <CardDescription className="text-center text-pretty tracking-tight leading-4 w-full pb-3 px-2">
           {dbUser?.bio}
         </CardDescription>
         <CardContent className="flex flex-col items-center justify-center w-full">
