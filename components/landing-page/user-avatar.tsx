@@ -1,23 +1,30 @@
+import { cn } from "@/lib/utils";
 import { User } from "@prisma/client";
-import Link from "next/link";
-import { Avatar, AvatarFallback, AvatarImage } from "../ui/avatar";
+import Image from "next/image";
+import BorderGradient from "../ui/background-gradient";
 
 type UserAvatarProps = {
   dbUser: User | null;
+  className?: string;
 };
 
-const UserAvatar = ({ dbUser }: UserAvatarProps) => {
+const UserAvatar = ({ dbUser, className }: UserAvatarProps) => {
   return (
     <>
       {dbUser && (
-        <Link href="/dashboard">
-          <Avatar className="absolute top-2 right-14 h-12 w-12">
-            <AvatarImage src={dbUser?.avatar || ""} alt={dbUser?.name} />
-            <AvatarFallback>
-              {dbUser?.name?.charAt(0).toUpperCase()}
-            </AvatarFallback>
-          </Avatar>
-        </Link>
+        <BorderGradient className="rounded-full">
+          <Image
+            src={dbUser?.avatar || ""}
+            alt={dbUser?.name || ""}
+            width={60}
+            height={60}
+            className={cn(
+              "h-12 w-12 rounded-full object-cover border-[0.2rem] border-white shadow-xl",
+              className
+            )}
+            priority
+          />
+        </BorderGradient>
       )}
     </>
   );

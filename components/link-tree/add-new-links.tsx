@@ -70,8 +70,6 @@ const AddNewLinks = ({ dbUser, dispatch }: AddNewLinksProps) => {
 
   const pathname = usePathname();
 
-  const isDashboardPath = pathname === "/dashboard";
-
   return (
     <div className="flex flex-col items-center justify-center space-y-2 w-full mt-4">
       {newUserLinks.length > 0 && pathname === "/dashboard" && (
@@ -99,12 +97,17 @@ const AddNewLinks = ({ dbUser, dispatch }: AddNewLinksProps) => {
           />
 
           <Button
+            disabled={!currentLink}
             onClick={handleAddNewLink}
             size="icon"
             variant="ghost"
             type="button"
           >
-            <CircleFadingPlus />
+            <CircleFadingPlus
+              className={`${
+                currentLink ? "text-opacity-100" : "text-opacity-70"
+              }`}
+            />
           </Button>
         </div>
         <div className="flex flex-row items-center justify-between mt-6">

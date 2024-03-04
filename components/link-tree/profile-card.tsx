@@ -1,8 +1,9 @@
 "use client";
 
 import { DbUserWithLinks } from "@/lib/types";
-import Image from "next/image";
+import { motion } from "framer-motion";
 import { usePathname, useRouter } from "next/navigation";
+import UserAvatar from "../landing-page/user-avatar";
 import { Button } from "../ui/button";
 import { Card, CardContent, CardDescription, CardHeader } from "../ui/card";
 import TreeLinks from "./tree-links";
@@ -17,19 +18,24 @@ const ProfileCard = ({ dbUser }: ProfileCardProps) => {
   const { push } = useRouter();
 
   return (
-    <>
+    <motion.div
+      animate={{
+        scale: [0, 1],
+        opacity: [0, 1],
+      }}
+      initial={{
+        scale: 0,
+        opacity: 0,
+      }}
+      transition={{
+        duration: 0.5,
+      }}
+    >
       <Card className="w-[24rem] dark:bg-gray-950 shadow-lg relative">
         <CardHeader>
           <div className="flex flex-row items-center justify-center">
             <div className="relative p-2">
-              <Image
-                src={dbUser?.avatar || ""}
-                alt={dbUser?.name || ""}
-                width={80}
-                height={80}
-                className="h-24 w-24 rounded-full object-cover border-[0.35rem] border-white shadow-xl"
-                priority
-              />
+              <UserAvatar dbUser={dbUser} className="h-16 w-16" />
             </div>
 
             <span className="text-2xl font-semibold ml-1">{dbUser?.name}</span>
@@ -56,7 +62,7 @@ const ProfileCard = ({ dbUser }: ProfileCardProps) => {
           </div>
         )}
       </Card>
-    </>
+    </motion.div>
   );
 };
 

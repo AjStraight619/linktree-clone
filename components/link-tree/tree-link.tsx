@@ -1,3 +1,4 @@
+import { liVariants } from "@/lib/constants";
 import { UserLink, UserLinkAction } from "@/lib/types";
 import { motion } from "framer-motion";
 import { usePathname } from "next/navigation";
@@ -13,8 +14,7 @@ const TreeLink = ({ link, dispatch }: TreeLinkProps) => {
   return (
     <motion.li
       className="flex items-center justify-between w-full rounded-xl shadow-lg p-2 dark:bg-gray-900 border"
-      animate="animate"
-      initial="hidden"
+      variants={liVariants}
     >
       <a
         href={link.url}
