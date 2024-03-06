@@ -45,6 +45,7 @@ const EditProfile = ({
     } else {
       toast.success("Profile updated successfully");
     }
+    setUsernameValidityMessage("");
   };
 
   const { handleSearch, searchParams } = useSearch("username");

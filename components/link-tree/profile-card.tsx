@@ -33,7 +33,7 @@ const ProfileCard = ({ dbUser }: ProfileCardProps) => {
     >
       <Card className="w-[24rem] dark:bg-gray-950 shadow-lg relative">
         <CardHeader>
-          <div className="flex flex-row items-center justify-center">
+          <div className="flex flex-row items-center justify-center mt-2">
             <div className="relative p-2">
               <UserAvatar dbUser={dbUser} className="h-16 w-16" />
             </div>
@@ -41,10 +41,10 @@ const ProfileCard = ({ dbUser }: ProfileCardProps) => {
             <span className="text-2xl font-semibold ml-1">{dbUser?.name}</span>
           </div>
         </CardHeader>
-        <CardDescription className="flex flex-col space-y-2">
+        <CardDescription className="flex flex-col space-y-4">
           <Link
             href={`/${dbUser?.username}`}
-            className="text-pretty text-center text-sm"
+            className="text-pretty text-center text-sm text-primary"
           >
             {"@" + dbUser?.username}
           </Link>
