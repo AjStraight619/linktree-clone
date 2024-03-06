@@ -25,6 +25,11 @@ type EditProfileProps = {
   username?: string;
 };
 
+type UsernameValidityMessage = {
+  message: string;
+  icon: React.ReactNode | null;
+};
+
 const EditProfile = ({
   dbUser,
   usernameAvailability,
