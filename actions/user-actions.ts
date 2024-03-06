@@ -137,3 +137,22 @@ export const removeLink = async (formData: FormData) => {
     revalidatePath(`/dashboard`);
   }
 };
+
+export const checkUsernameAvailability = async (
+  username: string,
+  currentUserId: string | undefined
+): Promise<boolean> => {
+  const user = await prisma.user.findUnique({
+    where: {
+      username,
+    },
+  });
+
+  // If user exists and it's not the current user, return false
+  if (user && user.id !== currentUserId) {
+    return false;
+  }
+
+  // If no user is found, or the user found is the current user, return true
+  return true;
+};

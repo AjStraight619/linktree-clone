@@ -3,9 +3,9 @@
 import { getSignedURL, saveAndReturnImage } from "@/actions/file-actions";
 import { User } from "@prisma/client";
 import { Undo2 } from "lucide-react";
-import Image from "next/image";
 import { useEffect, useState } from "react";
 import toast from "react-hot-toast";
+import UserAvatar from "../landing-page/user-avatar";
 import { Button } from "../ui/button";
 
 type FileUploadProps = {
@@ -84,18 +84,20 @@ const FileUpload = ({ dbUser }: FileUploadProps) => {
 
   return (
     <div className="flex flex-row items-center justify-center gap-2">
-      <Image
+      {/* <Image
         src={tempImageUrl || imageUrl || ""}
         alt={dbUser?.name || ""}
         width={80}
         height={80}
-        className="h-24 w-24 rounded-full object-cover border-[0.35rem] border-white shadow-xl"
+        className="h-24 w-24 rounded-full object-cover border-white shadow-xl"
         priority
-      />
+      /> */}
+
+      <UserAvatar dbUser={dbUser} src={tempImageUrl || imageUrl || ""} />
       {!file && (
         <Button
           type="button"
-          className="dark:bg-gray-900 bg-gray-50 shadow-lg text-black dark:text-gray-50 hover:bg-gray-100 dark:hover:bg-gray-900"
+          className="dark:bg-gray-900 bg-gray-50 shadow-lg text-black dark:text-gray-50 hover:bg-gray-100 dark:hover:bg-gray-800"
         >
           <label className="hover:cursor-pointer" htmlFor="file">
             Upload Image
@@ -113,14 +115,14 @@ const FileUpload = ({ dbUser }: FileUploadProps) => {
       {file && (
         <>
           <Button
-            className="dark:bg-gray-900 bg-gray-50 shadow-lg text-black dark:text-gray-50 hover:bg-gray-100 dark:hover:bg-gray-900"
+            className="dark:bg-gray-900 bg-gray-50 shadow-lg text-black dark:text-gray-50 hover:bg-gray-100 dark:hover:bg-gray-800"
             onClick={handleAccept}
           >
             Save
           </Button>
           <Button
             type="button"
-            className="dark:bg-gray-900 bg-gray-50 shadow-lg text-black dark:text-gray-50 hover:bg-gray-100 dark:hover:bg-gray-900"
+            className="dark:bg-gray-900 bg-gray-50 shadow-lg text-black dark:text-gray-50 hover:bg-gray-100 dark:hover:bg-gray-800"
             size="icon"
             onClick={handleUndo}
           >

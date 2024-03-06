@@ -2,12 +2,12 @@
 
 import { DbUserWithLinks } from "@/lib/types";
 import { motion } from "framer-motion";
+import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
 import UserAvatar from "../landing-page/user-avatar";
 import { Button } from "../ui/button";
 import { Card, CardContent, CardDescription, CardHeader } from "../ui/card";
 import TreeLinks from "./tree-links";
-import Username from "./username";
 
 type ProfileCardProps = {
   dbUser: DbUserWithLinks | null;
@@ -41,11 +41,20 @@ const ProfileCard = ({ dbUser }: ProfileCardProps) => {
             <span className="text-2xl font-semibold ml-1">{dbUser?.name}</span>
           </div>
         </CardHeader>
-        <CardDescription className="text-center text-pretty tracking-tight leading-4 w-full pb-3 px-2">
-          {dbUser?.bio}
+        <CardDescription className="flex flex-col space-y-2">
+          <Link
+            href={`/${dbUser?.username}`}
+            className="text-pretty text-center text-sm"
+          >
+            {"@" + dbUser?.username}
+          </Link>
+          <span className="text-center text-pretty tracking-tight leading-4 w-full pb-3 px-2">
+            {dbUser?.bio}
+          </span>
         </CardDescription>
         <CardContent className="flex flex-col items-center justify-center w-full">
-          <Username dbUser={dbUser} />
+          {/* <Username dbUser={dbUser} /> */}
+
           <div className="mt-4 w-full">
             <TreeLinks dbUser={dbUser} />
           </div>

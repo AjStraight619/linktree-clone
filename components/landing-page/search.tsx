@@ -1,23 +1,10 @@
 "use client";
+import { useSearch } from "@/hooks/useSearch";
 import { Search as SearchIcon } from "lucide-react";
-import { usePathname, useRouter, useSearchParams } from "next/navigation";
-import { useDebouncedCallback } from "use-debounce";
 import { Input } from "../ui/input";
 
 const Search = () => {
-  const pathname = usePathname();
-  const searchParams = useSearchParams();
-  const { replace } = useRouter();
-
-  const handleSearch = useDebouncedCallback((term) => {
-    const params = new URLSearchParams(searchParams);
-    if (term) {
-      params.set("search", term);
-    } else {
-      params.delete("search");
-    }
-    replace(`${pathname}?${params.toString()}`);
-  }, 300);
+  const { handleSearch, searchParams } = useSearch("search");
 
   return (
     <div className="relative md:w-1/2 w-full px-2 mt-8 group">

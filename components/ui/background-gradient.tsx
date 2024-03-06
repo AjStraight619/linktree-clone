@@ -10,7 +10,7 @@ const BorderGradient = ({ children, className }: BorderGradientProps) => {
   return (
     <div
       className={cn(
-        "p-[0.1rem] bg-gradient-to-tr from-amber-500 to-fuchsia-600 rounded-md",
+        "p-[1px] bg-gradient-to-tr from-amber-500 to-fuchsia-600 rounded-md",
         className
       )}
     >

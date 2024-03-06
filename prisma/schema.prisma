@@ -14,13 +14,14 @@ datasource db {
 }
 
 model User {
-  id       String  @id @unique
-  email    String  @unique
+  id       String   @id @unique
+  email    String   @unique
   name     String
   avatar   String?
-  username String? @unique
+  username String?  @unique
   bio      String?
   links    Link[]
+  newUser  Boolean?
 }
 
 model Link {

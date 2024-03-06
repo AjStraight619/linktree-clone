@@ -1,6 +1,6 @@
 import { removeLink } from "@/actions/user-actions";
 import { UserLink, UserLinkAction } from "@/lib/types";
-import { X } from "lucide-react";
+import { Minus } from "lucide-react";
 import React from "react";
 import {
   AlertDialog,
@@ -25,7 +25,7 @@ const RemoveLink = ({ link, dispatch }: RemoveLinkProps) => {
     <AlertDialog>
       <AlertDialogTrigger asChild>
         <Button type="button" size="icon" variant="ghost">
-          <X />
+          <Minus />
         </Button>
       </AlertDialogTrigger>
       <AlertDialogContent>

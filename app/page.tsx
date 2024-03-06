@@ -2,27 +2,28 @@ import { checkIfUserExistsInDb, createUserInDb } from "@/actions/user-actions";
 import CallToAction from "@/components/landing-page/call-to-action";
 import { Header } from "@/components/landing-page/header";
 import Hero from "@/components/landing-page/hero";
-import LinkTreeSearchList from "@/components/landing-page/link-tree-search";
 import Search from "@/components/landing-page/search";
 import { getKindeServerSession } from "@kinde-oss/kinde-auth-nextjs/server";
 import { Suspense } from "react";
 
-type HomeProps = {
-  searchParams: {
-    search: string;
-  };
-};
+// type HomeProps = {
+//   searchParams: {
+//     search: string;
+//   };
+// };
 
-export default async function Home({ searchParams }: HomeProps) {
+export default async function Home() {
   let dbUser;
   const { getUser } = getKindeServerSession();
 
   const user = await getUser();
+  console.log("user in main page", user);
   dbUser = user ? await checkIfUserExistsInDb(user.id) : null;
-  console.log("dbUser", dbUser);
+
   if (!dbUser && user) {
     await createUserInDb(user);
   }
+  console.log("dbUser on main page: ", dbUser);
 
   return (
     <main className="flex min-h-screen flex-col items-center justify-between p-24 overflow-y-auto">
@@ -52,7 +53,7 @@ export default async function Home({ searchParams }: HomeProps) {
       </div>
 
       <Suspense fallback={<div>Loading...</div>}>
-        <LinkTreeSearchList searchParams={searchParams} />
+        {/* <LinkTreeSearchList searchParams={searchParams} /> */}
       </Suspense>
     </main>
   );

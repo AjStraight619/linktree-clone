@@ -1,10 +1,9 @@
-import Link from "next/link";
-
 import {
   RegisterLink,
   getKindeServerSession,
 } from "@kinde-oss/kinde-auth-nextjs/server";
 import { ArrowRight } from "lucide-react";
+import Link from "next/link";
 import BorderGradient from "../ui/background-gradient";
 import { Button } from "../ui/button";
 
