@@ -14,7 +14,6 @@ const Username = ({ dbUser }: UsernameProps) => {
   const inputRef = useRef<HTMLInputElement>(null);
   const [isEditing, setIsEditing] = useState(false);
   const [username, setUsername] = useState(dbUser?.username || "");
-
   const [error, setError] = useState("");
 
   const handleChange = (input: string) => {
@@ -38,6 +37,7 @@ const Username = ({ dbUser }: UsernameProps) => {
     if (username === dbUser?.username) {
       return;
     }
+
     formData.append("username", username);
     formData.append("userId", dbUser?.id as string);
     const { success, error } = await updateUsername(formData);

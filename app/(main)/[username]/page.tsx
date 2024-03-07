@@ -10,6 +10,7 @@ type LinkTreePageProps = {
 // dynamic route to display a user's link tree
 
 const getUserByUsername = async (username: string) => {
+  // querying db to find user by user name
   const dbUser = await prisma.user.findUnique({
     where: {
       username,
@@ -23,8 +24,11 @@ const getUserByUsername = async (username: string) => {
 };
 
 export default async function LinkTreePage({ params }: LinkTreePageProps) {
+  // destructuring user name from params
   const { username } = params;
+  // querying db to find user by user name
   const dbUser = await getUserByUsername(username);
+
   return (
     <main className="min-h-screen flex flex-col items-center justify-center p-24">
       <ProfileCard dbUser={dbUser} />

@@ -53,8 +53,6 @@ const ProfileCard = ({ dbUser }: ProfileCardProps) => {
           </span>
         </CardDescription>
         <CardContent className="flex flex-col items-center justify-center w-full">
-          {/* <Username dbUser={dbUser} /> */}
-
           <div className="mt-4 w-full">
             <TreeLinks dbUser={dbUser} />
           </div>

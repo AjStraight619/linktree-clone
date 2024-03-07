@@ -1,7 +1,8 @@
 import { removeLink } from "@/actions/user-actions";
 import { UserLink, UserLinkAction } from "@/lib/types";
-import { Minus } from "lucide-react";
+import { X } from "lucide-react";
 import React from "react";
+import toast from "react-hot-toast";
 import {
   AlertDialog,
   AlertDialogCancel,
@@ -25,7 +26,7 @@ const RemoveLink = ({ link, dispatch }: RemoveLinkProps) => {
     <AlertDialog>
       <AlertDialogTrigger asChild>
         <Button type="button" size="icon" variant="ghost">
-          <Minus />
+          <X />
         </Button>
       </AlertDialogTrigger>
       <AlertDialogContent>
@@ -33,7 +34,12 @@ const RemoveLink = ({ link, dispatch }: RemoveLinkProps) => {
           action={async (formData) => {
             formData.append("linkId", link.id);
             dispatch({ type: "remove", payload: link });
-            await removeLink(formData);
+            const { success, error } = await removeLink(formData);
+            if (success) {
+              toast.success("Link removed");
+            } else {
+              toast.error(error);
+            }
           }}
         >
           <AlertDialogHeader>

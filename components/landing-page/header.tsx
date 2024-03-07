@@ -68,9 +68,11 @@ const UserDropdown = ({ dbUser }: HeaderProps) => {
           {userOptions.map((option, index) => (
             <motion.li key={index}>
               <Link href={option.href}>
-                <div className="flex items-center gap-2">
-                  <span>{option.icon}</span>
-                  <span>{option.label}</span>
+                <div className="flex items-center gap-2 group p-2 dark:hover:bg-gray-800 hover:bg-gray-100 rounded-lg transition-all duration-300">
+                  <span className="group-hover:scale-105">{option.icon}</span>
+                  <span className="group-hover:text-opacity-70">
+                    {option.label}
+                  </span>
                 </div>
               </Link>
             </motion.li>

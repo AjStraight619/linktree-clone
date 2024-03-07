@@ -1,3 +1,5 @@
+// framer motion variants for rendering lists
+
 export const ulVariants = {
   hidden: {
     opacity: 0,

@@ -83,7 +83,7 @@ const FileUpload = ({ dbUser }: FileUploadProps) => {
   };
 
   return (
-    <div className="flex flex-row items-center justify-center gap-2">
+    <div className="flex flex-row items-center justify-center gap-2 w-full">
       {/* <Image
         src={tempImageUrl || imageUrl || ""}
         alt={dbUser?.name || ""}

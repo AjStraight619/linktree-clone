@@ -7,7 +7,7 @@ async function createUsersAndLinks() {
       email: 'user1@example.com',
       name: 'User One',
       avatar: 'https://example.com/avatar1.png',
-      Link: {
+      link: {
         create: [
           { title: 'User1 Link1', url: 'https://user1link1.com' },
           { title: 'User1 Link2', url: 'https://user1link2.com' },
@@ -18,7 +18,7 @@ async function createUsersAndLinks() {
       email: 'user2@example.com',
       name: 'User Two',
       avatar: 'https://example.com/avatar2.png',
-      Link: {
+      link: {
         create: [
           { title: 'User2 Link1', url: 'https://user2link1.com' },
           { title: 'User2 Link2', url: 'https://user2link2.com' },

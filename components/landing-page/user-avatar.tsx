@@ -23,15 +23,15 @@ const UserAvatar = ({
       {dbUser && (
         <BorderGradient className="rounded-full">
           <Image
-            src={dbUser?.avatar || src || ""}
+            src={src || dbUser?.avatar || ""}
             alt={dbUser?.name || ""}
             width={width}
             height={height}
             className={cn(
-              "rounded-full  bg-white p-[1px] shadow-xl",
+              "rounded-full w-16 h-16 object-cover bg-white p-[1px] shadow-xl",
               className
             )}
-            priority
+            priority={true}
             quality={100}
           />
         </BorderGradient>

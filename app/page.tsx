@@ -3,6 +3,7 @@ import CallToAction from "@/components/landing-page/call-to-action";
 import { Header } from "@/components/landing-page/header";
 import Hero from "@/components/landing-page/hero";
 import Search from "@/components/landing-page/search";
+import { KindeUser } from "@kinde-oss/kinde-auth-nextjs/dist/types";
 import { getKindeServerSession } from "@kinde-oss/kinde-auth-nextjs/server";
 import { Suspense } from "react";
 
@@ -12,18 +13,35 @@ import { Suspense } from "react";
 //   };
 // };
 
-export default async function Home() {
-  let dbUser;
+async function getUserFromAuth() {
   const { getUser } = getKindeServerSession();
-
   const user = await getUser();
   console.log("user in main page", user);
-  dbUser = user ? await checkIfUserExistsInDb(user.id) : null;
+  return user;
+}
 
+async function ensureUserInDb(user: KindeUser | null) {
+  let dbUser = await checkIfUserExistsInDb(user?.id as string);
   if (!dbUser && user) {
-    await createUserInDb(user);
+    dbUser = await createUserInDb(user);
   }
   console.log("dbUser on main page: ", dbUser);
+  return dbUser;
+}
+
+export default async function Home() {
+  // let dbUser;
+  const user = await getUserFromAuth();
+  const dbUser = user ? await ensureUserInDb(user) : null;
+
+  console.log("user in main page", user);
+  console.log("db user in main page", dbUser);
+  // dbUser = user ? await checkIfUserExistsInDb(user.id) : null;
+
+  // if (!dbUser && user) {
+  //   await createUserInDb(user);
+  // }
+  // console.log("dbUser on main page: ", dbUser);
 
   return (
     <main className="flex min-h-screen flex-col items-center justify-between p-24 overflow-y-auto">

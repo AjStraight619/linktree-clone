@@ -15,7 +15,7 @@ export const checkIfUserExistsInDb = async (userId: string) => {
       id: userId,
     },
   });
-  console.log("user", user);
+
   return user;
 };
 
@@ -88,7 +88,7 @@ export const updateUsername = async (
   const userId = formData.get("userId") as string;
   const username = formData.get("username") as string;
   try {
-    const user = await prisma.user.update({
+    await prisma.user.update({
       where: {
         id: userId,
       },
@@ -116,17 +116,16 @@ export const removeLink = async (formData: FormData) => {
   const linkId = formData.get("linkId") as string;
 
   try {
-    const removedLink = await prisma.link.delete({
+    await prisma.link.delete({
       where: {
         id: linkId,
       },
     });
-    if (removedLink) {
-      return {
-        success: true,
-        error: null,
-      };
-    }
+
+    return {
+      success: true,
+      error: null,
+    };
   } catch (err) {
     const error = getErrorMessage(err);
     return {
